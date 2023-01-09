@@ -135,6 +135,7 @@
 
             <soup.neumorphism.NeumorphButton
                 style="@style/Widget.Neumorph.Button"
+                android:id="@+id/login_button"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="37dp"

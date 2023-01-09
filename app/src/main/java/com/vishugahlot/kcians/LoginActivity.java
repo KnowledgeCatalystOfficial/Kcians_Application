@@ -16,7 +16,7 @@ import soup.neumorphism.NeumorphButton;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private NeumorphButton signupButton;
+    private NeumorphButton signupButton, loginButton;
     private LinearLayout layout_main;
     private Animation Animation_fadein,  Animation_rotate;
 
@@ -25,10 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-
         Utils.blackIconStatusBar(LoginActivity.this, R.color.light_Background);
+
 
         //declaring the animation effect
 //        Animation effects are located in res > anim folder
@@ -40,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         img_logo_login= findViewById(R.id.img_logo_login);
         img_Botttom_login = findViewById(R.id.img_Bottom_login);
         text_logo_login = findViewById(R.id.text_logo_login);
+        loginButton = findViewById(R.id.login_button);
 
         //rotating the logo here
         img_logo_login.setAnimation(Animation_rotate);
@@ -67,5 +66,15 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(sharedIntent);
             }
         });
+
+//        Login button intent
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, NavigtionActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

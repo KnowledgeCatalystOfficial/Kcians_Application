@@ -7,7 +7,13 @@
         <entry key="..\:/KC/Application/app/src/main/res/drawable/no_background.xml" value="0.138" />
         <entry key="..\:/KC/Application/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/KC/Application/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/KC/Application/app/src/main/res/layout/activity_navigtion.xml" value="0.22" />
         <entry key="..\:/KC/Application/app/src/main/res/layout/activity_signup.xml" value="0.20615384615384616" />
+        <entry key="..\:/KC/Application/app/src/main/res/layout/fragment_calender.xml" value="0.209375" />
+        <entry key="..\:/KC/Application/app/src/main/res/layout/fragment_community.xml" value="0.1953125" />
+        <entry key="..\:/KC/Application/app/src/main/res/layout/fragment_home.xml" value="0.209375" />
+        <entry key="..\:/KC/Application/app/src/main/res/layout/fragment_notification.xml" value="0.209375" />
+        <entry key="..\:/KC/Application/app/src/main/res/menu/bottom_menu.xml" value="0.209375" />
       </map>
     </option>
   </component>

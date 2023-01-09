@@ -11,5 +11,13 @@
 <!--    other colors-->
     <color name="light_Background">#ecf0f3</color>
     <color name="textColor">#193566</color>
+    
+<!--    UI navigation color-->
+    <color name="dark_blue">#52CFC5</color>
+    <color name="purple">#5b3db7</color>
+    <color name="dark_pink">#c6419e</color>
+    <color name="yellow">#e5a818</color>
+    <color name="lavender">#8692f7</color>
+
 
 </resources>
