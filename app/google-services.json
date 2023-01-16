@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "316317608797",
+    "project_id": "knowc-6f975",
+    "storage_bucket": "knowc-6f975.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316317608797:android:b30350a71e1ff01e5016b4",
+        "android_client_info": {
+          "package_name": "com.vishugahlot.kcians"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316317608797-udcjcuvlg94q728tokhr230l40j2bf5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlJq5F6UsuoGeXTmvd3v8OJA1VKupuM5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316317608797-udcjcuvlg94q728tokhr230l40j2bf5p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

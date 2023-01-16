@@ -18,7 +18,7 @@ public class SignupActivity extends AppCompatActivity {
     private Animation Animation_fadein,  Animation_rotate;
     private View img_logo_signup;
     private NeumorphButton back_login;
-///////////jkhbjhgnb
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

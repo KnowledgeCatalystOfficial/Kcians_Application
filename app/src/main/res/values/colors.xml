@@ -18,6 +18,9 @@
     <color name="dark_pink">#c6419e</color>
     <color name="yellow">#e5a818</color>
     <color name="lavender">#8692f7</color>
+    <color name="bu">
+        #BBCDFF
+    </color>
 
 
 </resources>
