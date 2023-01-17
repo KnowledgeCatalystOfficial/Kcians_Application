@@ -22,7 +22,7 @@ public class NavigtionActivity extends AppCompatActivity {
 
         //finding the id of bottom navigation
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
+        Utils.blackIconStatusBar(NavigtionActivity.this , R.color.bu);
         replaceFragment(new HomeFragment());
         bottomNavigationView.setBackground(null);
         bottomNavigationView.setOnItemSelectedListener(item -> {
