@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
 <!--    other colors-->
-    <color name="light_Background">#ecf0f3</color>
+    <color name="light_Background">#008080</color>
     <color name="textColor">#193566</color>
     
 <!--    UI navigation color-->
