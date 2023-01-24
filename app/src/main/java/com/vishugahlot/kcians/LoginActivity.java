@@ -14,6 +14,7 @@ import android.util.Pair;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -46,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     FirebaseAuth mauth;
+
+    //normal login
+    EditText email,password;
    ////////////////////
 
     @Override
@@ -94,6 +99,32 @@ public class LoginActivity extends AppCompatActivity {
                 loginwithgoogle();
             }
         });
+        //normal login
+        email=findViewById(R.id.et_email);
+        password=findViewById(R.id.et_pass);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(email.getText().toString().isEmpty())
+                {
+
+                    email.setError("Email Empty");
+                }
+                else
+                {
+                    if(password.getText().toString().isEmpty())
+                    {
+                        password.setError("Password Empty");
+
+                    }
+                    else
+                    {
+                        signinuser(email.getText().toString(),password.getText().toString());
+                    }
+                }
+            }
+
+        });
 
         //rotating the logo here
         img_logo_login.setAnimation(Animation_rotate);
@@ -122,14 +153,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        Login button intent
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, NavigtionActivity.class);
-                startActivity(intent);
-            }
-        });
+//        Login button onclick
 
     }
 
@@ -180,4 +204,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    private void signinuser(String email, String password) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+
+                Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(LoginActivity.this,SignupActivity.class);
+                startActivity(i);
+
+            }
+
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
 }

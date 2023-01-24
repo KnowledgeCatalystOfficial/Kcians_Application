@@ -1,12 +1,15 @@
 package com.vishugahlot.kcians;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Pair;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,4 +42,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 3000);
     }
-}
+   }
