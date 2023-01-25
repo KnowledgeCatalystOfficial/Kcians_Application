@@ -1,22 +1,21 @@
 package com.vishugahlot.kcians;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.app.ActivityOptions;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Pair;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -25,7 +24,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -33,11 +31,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.ArrayList;
+
 import soup.neumorphism.NeumorphButton;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private NeumorphButton signupButton, loginButton;
+    ViewPager2 viewPager2;
+    ArrayList<ViewPagerItem> viewPagerItemArrayList;
+    private NeumorphButton NextButton;
     private LinearLayout layout_main;
     ConstraintLayout sign_in_google;
     private Animation Animation_fadein,  Animation_rotate;
@@ -66,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private View img_logo_login, img_Botttom_login, text_logo_login;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,11 +82,9 @@ public class LoginActivity extends AppCompatActivity {
         Animation_fadein = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fade_in);
 
         layout_main= findViewById(R.id.layout_main);
-        signupButton = findViewById(R.id.signup_button);
+        NextButton = findViewById(R.id.next_button);
         img_logo_login= findViewById(R.id.img_logo_login);
-        img_Botttom_login = findViewById(R.id.img_Bottom_login);
         text_logo_login = findViewById(R.id.text_logo_login);
-        loginButton = findViewById(R.id.login_button);
 
         ///sign in with google
         sign_in_google=findViewById(R.id.google_signin_btn);
@@ -99,32 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                 loginwithgoogle();
             }
         });
-        //normal login
-        email=findViewById(R.id.et_email);
-        password=findViewById(R.id.et_pass);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(email.getText().toString().isEmpty())
-                {
 
-                    email.setError("Email Empty");
-                }
-                else
-                {
-                    if(password.getText().toString().isEmpty())
-                    {
-                        password.setError("Password Empty");
 
-                    }
-                    else
-                    {
-                        signinuser(email.getText().toString(),password.getText().toString());
-                    }
-                }
-            }
-
-        });
 
         //rotating the logo here
         img_logo_login.setAnimation(Animation_rotate);
@@ -139,24 +116,35 @@ public class LoginActivity extends AppCompatActivity {
         }, 1000);
 
 
-//        signup button intent
-        signupButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent sharedIntent = new Intent(LoginActivity.this, SignupActivity.class);
-                ActivityOptions options= ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this,
-                        Pair.create(img_logo_login, "logo"),
-                        Pair.create(img_Botttom_login, "img_tree"),
-                        Pair.create(text_logo_login, "logo_text"));
-                startActivity(sharedIntent);
-            }
-        });
+//        view pager function start
 
-//        Login button onclick
+        viewPager2 = findViewById(R.id.viewpager);
+        int[] images = {R.drawable.walkone,R.drawable.walktwo};
+
+        viewPagerItemArrayList = new ArrayList<>();
+
+        for (int i =0; i< images.length ; i++){
+
+            ViewPagerItem viewPagerItem = new ViewPagerItem(images[i]);
+            viewPagerItemArrayList.add(viewPagerItem);
+
+        }
+
+        VPAdapter vpAdapter = new VPAdapter(viewPagerItemArrayList);
+
+        viewPager2.setAdapter(vpAdapter);
+        viewPager2.setClipToPadding(false);
+        viewPager2.setClipChildren(false);
+        viewPager2.setOffscreenPageLimit(2);
+        viewPager2.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+//     view pager function end here
 
     }
 
+
+//    login function
     private void loginwithgoogle() {
         Intent signinintent=gsc.getSignInIntent();
         startActivityForResult(signinintent,100);
@@ -179,6 +167,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //login google activity
     private void firebaseloginwithgoogle(String idToken) {
         AuthCredential credential= GoogleAuthProvider.getCredential(idToken,null);
         mauth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -204,25 +193,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private void signinuser(String email, String password) {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-
-                Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(LoginActivity.this,SignupActivity.class);
-                startActivity(i);
-
-            }
 
 
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
 
 }
