@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -30,6 +31,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -58,11 +63,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentuser=mauth.getCurrentUser();
-        if(currentuser!=null)
+        try {
+            GoogleSignIn.getClient(getApplicationContext(), GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
+            FirebaseAuth.getInstance().signOut();
+
+        }
+        catch (Exception e)
         {
-            Intent i=new Intent(LoginActivity.this, NavigtionActivity.class);
-            startActivity(i);
         }
 
     }
@@ -175,9 +182,26 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                    GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
-                    Toast.makeText(LoginActivity.this,account.getDisplayName().toString() , Toast.LENGTH_SHORT).show();
+                    FirebaseDatabase.getInstance().getReference().child("users").child(mauth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(i);
+
+                            } else {
+                                Intent i = new Intent(LoginActivity.this, Setup_profile.class);
+                                startActivity(i);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
 
 
                 }
