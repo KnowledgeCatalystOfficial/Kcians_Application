@@ -15,13 +15,13 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile name"
         android:layout_below="@id/profilepic"
-        android:textColor="@color/black"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:textStyle="bold"
+        android:text="Profile name"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        android:layout_marginStart="16dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/username"
