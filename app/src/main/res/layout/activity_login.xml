@@ -65,8 +65,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintVertical_bias=".376"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent">
 
+            </androidx.viewpager2.widget.ViewPager2>
+
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/slideHint"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
+
+                android:src="@drawable/slide"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </soup.neumorphism.NeumorphCardView>
 
@@ -76,8 +90,9 @@
             android:orientation="horizontal">
 
             <soup.neumorphism.NeumorphButton
-                android:layout_marginRight="20sp"
-                android:id="@+id/next_button"
+
+                android:layout_marginEnd="20sp"
+                android:id="@+id/next_but"
                 style="@style/Widget.Neumorph.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,6 +105,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:neumorph_backgroundColor="@color/textColor"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

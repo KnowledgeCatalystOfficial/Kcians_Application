@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         Utils.blackIconStatusBar(MainActivity.this , R.color.light_Background);
 
         tv_name = findViewById(R.id.tv_name);
-        img_Botttom = findViewById(R.id.img_Bottom);
         img_logo = findViewById(R.id.img_logo);
 
         new Handler().postDelayed(new Runnable() {
@@ -85,9 +84,8 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
                         Pair.create(img_logo, "logo"),
-                        Pair.create(img_Botttom, "img_tree"),
                         Pair.create(tv_name, "logo_text"));
             }
-        }, 3000);
+        }, 5000);
     }
    }

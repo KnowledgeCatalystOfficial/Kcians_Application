@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,9 +45,11 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageView headerImage;
-    TextView headertext,username;
+    TextView headertext,username,TextLogoName;
     //drawer_layout
     FloatingActionButton fab;
+
+    private Animation Bounce;
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,9 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         fab.setImageResource(R.drawable.google);
         fab.setImageDrawable(getResources().getDrawable(R.drawable.google));
 
-        ////Category Recycler
+        //finding ID
+        Bounce = AnimationUtils.loadAnimation(NavigtionActivity.this,R.anim.bounce);
+        TextLogoName = findViewById(R.id.textView);
 
         //drawer layout
         drawerLayout=findViewById(R.id.drawer);
@@ -70,9 +76,12 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         headerImage=navigationView.getHeaderView(0).findViewById(R.id.profilepic);
         headertext=navigationView.getHeaderView(0).findViewById(R.id.name);
         username=navigationView.getHeaderView(0).findViewById(R.id.username);
-        headertext.setText(account.getDisplayName());
-        username.setText(account.getEmail());
-        Picasso.get().load(account.getPhotoUrl()).into(headerImage);
+
+        //dekh liyo bhai                             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//        headertext.setText(account.getDisplayName());
+//        username.setText(account.getEmail());
+//        Picasso.get().load(account.getPhotoUrl()).into(headerImage);
 
 
 
@@ -100,13 +109,16 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         });
 
         Profile_image=findViewById(R.id.profile_image);
-        Picasso.get().load(account.getPhotoUrl()).into(Profile_image);
+//        Picasso.get().load(account.getPhotoUrl()).into(Profile_image);
         Profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
+//        logo name animation
+        TextLogoName.setAnimation(Bounce);
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -134,7 +146,7 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         if(id==R.id.nav_login)
         {
 
-            logout();
+            //logout();
             Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
         }
         if(id==R.id.nav_share)
@@ -149,18 +161,18 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         return true;
 
     }
-    private void logout() {
-        try {
-            GoogleSignIn.getClient(getApplicationContext(), GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
-            FirebaseAuth.getInstance().signOut();
-            Intent i=new Intent(NavigtionActivity.this, MainActivity.class);
-            startActivity(i);
-        }
-        catch (Exception e)
-        {
-            Toast.makeText(NavigtionActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void logout() {
+//        try {
+//            GoogleSignIn.getClient(getApplicationContext(), GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
+//            FirebaseAuth.getInstance().signOut();
+//            Intent i=new Intent(NavigtionActivity.this, MainActivity.class);
+//            startActivity(i);
+//        }
+//        catch (Exception e)
+//        {
+//            Toast.makeText(NavigtionActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
 
