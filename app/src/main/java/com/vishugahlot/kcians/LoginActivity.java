@@ -38,16 +38,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import pl.droidsonroids.gif.GifImageView;
 import soup.neumorphism.NeumorphButton;
 
 public class LoginActivity extends AppCompatActivity {
 
     ViewPager2 viewPager2;
+    GifImageView SlideHint;
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
     private NeumorphButton NextButton;
     private LinearLayout layout_main;
     ConstraintLayout sign_in_google;
-    private Animation Animation_fadein,  Animation_rotate;
+    private Animation Animation_fadein,  Animation_rotate, Animation_fadeout;
 
 
     ////google sign in necessaties
@@ -66,12 +68,8 @@ public class LoginActivity extends AppCompatActivity {
         try {
             GoogleSignIn.getClient(getApplicationContext(), GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
             FirebaseAuth.getInstance().signOut();
-
         }
-        catch (Exception e)
-        {
-        }
-
+        catch (Exception e){}
     }
 
     private View img_logo_login, img_Botttom_login, text_logo_login;
@@ -87,11 +85,15 @@ public class LoginActivity extends AppCompatActivity {
 //        Animation effects are located in res > anim folder
         Animation_rotate= AnimationUtils.loadAnimation(LoginActivity.this, R.anim.rotate);
         Animation_fadein = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fade_in);
+        Animation_fadeout = AnimationUtils.loadAnimation(LoginActivity.this,R.anim.fade_out);
 
+
+//        finding all IDs
         layout_main= findViewById(R.id.layout_main);
-        NextButton = findViewById(R.id.next_button);
+        NextButton = findViewById(R.id.next_but);
         img_logo_login= findViewById(R.id.img_logo_login);
         text_logo_login = findViewById(R.id.text_logo_login);
+        SlideHint = findViewById(R.id.slideHint);
 
         ///sign in with google
         sign_in_google=findViewById(R.id.google_signin_btn);
@@ -123,6 +125,20 @@ public class LoginActivity extends AppCompatActivity {
         }, 1000);
 
 
+//        slide hint gif animation fade out effect
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SlideHint.setVisibility(View.INVISIBLE);
+                SlideHint.setAnimation(Animation_fadeout);
+            }
+        }, 2500);
+
+//        next button
+//       !!!!!!!!!!!!!!!!!!!!!!!!!
+//        next button ends
+
 
 //        view pager function start
 
@@ -131,9 +147,9 @@ public class LoginActivity extends AppCompatActivity {
 
         viewPagerItemArrayList = new ArrayList<>();
 
-        for (int i =0; i< images.length ; i++){
+        for (int image : images) {
 
-            ViewPagerItem viewPagerItem = new ViewPagerItem(images[i]);
+            ViewPagerItem viewPagerItem = new ViewPagerItem(image);
             viewPagerItemArrayList.add(viewPagerItem);
 
         }
@@ -148,6 +164,13 @@ public class LoginActivity extends AppCompatActivity {
 
 //     view pager function end here
 
+//        next button function
+        NextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 
