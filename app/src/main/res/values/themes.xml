@@ -20,4 +20,26 @@
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_height">1dp</item>
     </style>
+
+<!--    night mode theme-->
+    <style name="nightModeSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/night_setting</item>
+        <item name="colorSwitchThumbNormal">#ffff</item>
+        <item name="android:colorForeground">#99ffff</item>
+    </style>
+
+<!--for notification in settings-->
+    <style name="notificationSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/notifications</item>
+        <item name="colorSwitchThumbNormal">#ffff</item>
+        <item name="android:colorForeground">#99ffff</item>
+    </style>
+
+<!--for private Account in settings-->
+    <style name="privateAccountSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/private_account</item>
+        <item name="colorSwitchThumbNormal">#ffff</item>
+        <item name="android:colorForeground">#99ffff</item>
+    </style>
+
 </resources>
