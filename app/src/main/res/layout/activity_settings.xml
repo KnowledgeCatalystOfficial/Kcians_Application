@@ -440,6 +440,14 @@
                 </RelativeLayout>
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_back_white10_20"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
