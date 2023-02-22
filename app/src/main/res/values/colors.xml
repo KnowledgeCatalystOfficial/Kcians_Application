@@ -30,7 +30,7 @@
     <color name="notifications">#13B2C3</color>
     <color name="private_account">#E6A326</color>
     <color name="security">#095F69</color>
-
+    <color name="background">#2962FF</color>
 
 
 </resources>

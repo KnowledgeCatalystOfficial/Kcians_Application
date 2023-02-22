@@ -140,6 +140,7 @@ public class Setup_profile extends AppCompatActivity {
 
 
 
+
         Intent intent=new Intent(Setup_profile.this,NavigtionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

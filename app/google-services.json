@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "316317608797",
+    "firebase_url": "https://knowc-6f975-default-rtdb.firebaseio.com",
     "project_id": "knowc-6f975",
     "storage_bucket": "knowc-6f975.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "316317608797-klv5pm5fs11u9ljo83po6qceblams6jd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vishugahlot.kcians",
+            "certificate_hash": "62905e422a07967659d1769172acde370de03bbd"
+          }
+        },
         {
           "client_id": "316317608797-udcjcuvlg94q728tokhr230l40j2bf5p.apps.googleusercontent.com",
           "client_type": 3

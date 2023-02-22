@@ -39,17 +39,38 @@ import java.util.ArrayList;
 public class NavigtionActivity extends AppCompatActivity  implements  NavigationView.OnNavigationItemSelectedListener{
     private View view;
     private BottomNavigationView bottomNavigationView;
-    ImageView Profile_image;
+    ImageView Profile_image,addpost;
 
     //ActivityMainBinding binding;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageView headerImage;
-    TextView headertext,username,TextLogoName;
+    TextView headertext,username,TextLogoName,following;
     //drawer_layout
     FloatingActionButton fab;
 
     private Animation Bounce;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        addpost.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        addpost.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        addpost.setVisibility(View.VISIBLE);
+
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +81,14 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         fab=findViewById(R.id.fab_btn);
         fab.setImageResource(R.drawable.google);
         fab.setImageDrawable(getResources().getDrawable(R.drawable.google));
+        addpost=findViewById(R.id.search_frag);
+        addpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(NavigtionActivity.this,Add_post.class);
+                startActivity(intent);
+            }
+        });
 
         //finding ID
         Bounce = AnimationUtils.loadAnimation(NavigtionActivity.this,R.anim.bounce);
@@ -72,16 +101,30 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         navigationView.setNavigationItemSelectedListener(this);
         GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(NavigtionActivity.this);
 
+
         /////setting up details
         headerImage=navigationView.getHeaderView(0).findViewById(R.id.profilepic);
         headertext=navigationView.getHeaderView(0).findViewById(R.id.name);
         username=navigationView.getHeaderView(0).findViewById(R.id.username);
+        following=navigationView.getHeaderView(0).findViewById(R.id.following);
 
         //dekh liyo bhai                             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-//        headertext.setText(account.getDisplayName());
-//        username.setText(account.getEmail());
-//        Picasso.get().load(account.getPhotoUrl()).into(headerImage);
+        headertext.setText(account.getDisplayName());
+        username.setText(account.getEmail());
+        Picasso.get().load(account.getPhotoUrl()).into(headerImage);
+        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int len= (int) snapshot.child("Category").getChildrenCount();
+                following.setText(String.valueOf(len));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
 
@@ -109,7 +152,7 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         });
 
         Profile_image=findViewById(R.id.profile_image);
-//        Picasso.get().load(account.getPhotoUrl()).into(Profile_image);
+        Picasso.get().load(account.getPhotoUrl()).into(Profile_image);
         Profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,15 +186,26 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
 
 
         }
+        if(id==R.id.synch)
+        {
+            replaceFragment(new HomeFragment());
+
+        }
         if(id==R.id.nav_login)
         {
 
-            //logout();
+            logout();
             Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
         }
         if(id==R.id.nav_share)
         {
 
+        }
+        if(id==R.id.settings)
+        {
+
+            Intent intent=new Intent(NavigtionActivity.this,SettingsActivity.class);
+            startActivity(intent);
         }
 
 
@@ -161,18 +215,18 @@ public class NavigtionActivity extends AppCompatActivity  implements  Navigation
         return true;
 
     }
-//    private void logout() {
-//        try {
-//            GoogleSignIn.getClient(getApplicationContext(), GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
-//            FirebaseAuth.getInstance().signOut();
-//            Intent i=new Intent(NavigtionActivity.this, MainActivity.class);
-//            startActivity(i);
-//        }
-//        catch (Exception e)
-//        {
-//            Toast.makeText(NavigtionActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//        }
-//    }
+   private void logout() {
+        try {
+            GoogleSignIn.getClient(getApplicationContext(), GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
+            FirebaseAuth.getInstance().signOut();
+            Intent i=new Intent(NavigtionActivity.this, MainActivity.class);
+            startActivity(i);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(NavigtionActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 

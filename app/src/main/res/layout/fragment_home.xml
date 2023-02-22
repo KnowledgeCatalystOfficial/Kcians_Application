@@ -8,25 +8,51 @@
     tools:context=".HomeFragment">
 
     <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorphCardView"
         style="@style/Widget.Neumorph.CardView"
         android:layout_width="match_parent"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="3dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        app:neumorph_shapeType="pressed"
         android:foregroundGravity="center_horizontal"
-        tools:ignore="MissingConstraints">
+        app:neumorph_shapeType="pressed"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cat_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="90sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!-- TODO: Update blank fragment layout -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cat_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="90sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphCardView
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:foregroundGravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="55sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neumorphCardView"
+        app:neumorph_shapeType="pressed"
+        tools:ignore="MissingConstraints">
+
+        <!-- TODO: Update blank fragment layout -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/posts_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </soup.neumorphism.NeumorphCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
