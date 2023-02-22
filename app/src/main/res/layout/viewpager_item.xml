@@ -15,7 +15,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_margin="4dp"
             app:cardCornerRadius="16dp"
             android:elevation="8dp">
 
@@ -25,11 +25,11 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/ivimage"
                     android:layout_width="320dp"
                     android:layout_height="320dp"
-                    android:id="@+id/ivimage"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/walkone"/>
+                    android:src="@drawable/walkone" />
 
             </RelativeLayout>
 

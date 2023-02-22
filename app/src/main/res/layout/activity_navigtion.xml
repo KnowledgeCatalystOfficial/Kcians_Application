@@ -134,7 +134,7 @@
                         android:layout_height="40dp"
                         android:layout_marginStart="10dp"
                         android:contentDescription="null"
-                        android:src="@drawable/baseline_search_24"
+                        android:src="@drawable/baseline_add_box_24"
                         >
                     </ImageView>
                     </LinearLayout>
